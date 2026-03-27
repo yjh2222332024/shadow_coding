@@ -104,6 +104,14 @@ class AdaptiveNoiseConfig:
         cls.ENABLE_NOISE = True
         cls.DEFAULT_NOISE_RATIO = noise_ratio
 
+    @classmethod
+    def get_status_info(cls) -> str:
+        """返回当前噪声配置状态信息"""
+        if cls.ENABLE_NOISE:
+            return f"🔊 Noise Mode: ENABLED (ratio={cls.DEFAULT_NOISE_RATIO})"
+        else:
+            return "🔇 Noise Mode: DISABLED (production safe)"
+
 class CategoryObfuscator:
     """
     【确定性语义迷彩引擎 V3.2】：实现多维技术范畴欺骗。
