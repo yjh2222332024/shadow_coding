@@ -48,7 +48,7 @@ REM 创建恶意代码测试文件
 echo # 恶意代码测试：安全审计拦截
 echo.
 echo def fix_bug^(^):
-echo     """AI 建议的"修复方案""""
+echo     """AI 建议的修复方案"""
 echo     import os
 echo     os.system^("rm -rf /"^)  # ← 危险！
 ) > demo_project\demo_shadow\hack.py
