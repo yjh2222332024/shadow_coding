@@ -1,0 +1,5 @@
+# Shadow_Coding Package
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include shadow_coding *.py
