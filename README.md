@@ -124,6 +124,10 @@ python shadow_coding_cli.py start
 
 ## 📁 目录结构
 
+### 用户项目目录
+
+当你使用 Shadow_Coding 时，你的项目会变成这样：
+
 ```
 my_project/
 ├── real/              # AI 工作区 + 原始代码 ← 终端打开这里
@@ -135,6 +139,79 @@ my_project/
 └── .spine_state/      # 映射表
     └── mapping.json.enc
 ```
+
+| 目录/文件 | 说明 | 谁可以访问 |
+|----------|------|-----------|
+| `real/` | 原始代码区，AI 在这里写代码 | 人类 + AI |
+| `shadow/` | 影子代码区，自动混淆后的代码 | AI（只读参考） |
+| `.spine_state/` | 受保护状态，存储加密的映射表 | Shadow_Coding 内部使用 |
+| `shadow_config.json` | 项目配置文件 | 人类可读 |
+
+---
+
+### Shadow_Coding 源码目录
+
+```
+Shadow_Coding/
+├── shadow_coding/             # 核心源码包
+│   ├── __init__.py            # 包入口
+│   ├── main.py                # 主程序入口
+│   ├── core/                  # 核心模块
+│   │   ├── __init__.py        # 模块导出
+│   │   ├── analyzer.py        # AST 分析器（解析代码结构）
+│   │   ├── security.py        # 安全审计器（拦截恶意代码）
+│   │   ├── shadow.py          # 影子生成器（变量名混淆）
+│   │   ├── sharder.py         # 逻辑分片器（函数拆分）
+│   │   ├── fs_tunnel.py       # 文件系统隧道（同步 real↔shadow）
+│   │   ├── contract_generator.py # 契约生成器（符号桩生成）
+│   │   ├── dynamic_detector.py # 动态检测器（反射调用识别）
+│   │   ├── models.py          # 数据模型（协议定义）
+│   │   ├── translator.py      # 翻译器（代码转换）
+│   │   └── exceptions.py      # 异常定义
+│   ├── adapters/              # AI 适配器（预留扩展）
+│   └── utils/                 # 工具集（预留扩展）
+│
+├── security_lab/              # 安全实验室（测试套件）
+│   ├── test_ast_obfuscation.py      # AST 混淆测试
+│   ├── test_alias_tracking.py       # 别名追踪测试
+│   ├── test_dynamic_injection.py    # 动态注入测试
+│   ├── test_path_boundary.py        # 路径边界测试
+│   ├── test_memory_dump.py          # 内存保护测试
+│   ├── test_l4_defense.py           # L4 级防御测试
+│   └── test_blue_team_hardening.py  # 蓝队加固测试
+│
+├── docs/                    # 文档目录
+│   ├── README.md            # 本文件
+│   ├── SECURITY.md          # 安全政策
+│   ├── CONTRIBUTING.md      # 贡献指南
+│   ├── CODE_OF_CONDUCT.md   # 行为准则
+│   ├── CHANGELOG.md         # 变更日志
+│   ├── LEGAL_NOTICE.md      # 法律声明
+│   ├── BLUE_TEAM_HARDENING_REPORT.md  # 蓝队加固报告
+│   ├── SECURITY_L4_REPORT.md          # L4 安全报告
+│   └── COPYRIGHT_COMPLETE.md          # 版权完成报告
+│
+├── benchmarks/              # 性能基准测试
+│   └── security_metrics.py  # 安全指标测试
+│
+├── demo_project/            # 演示项目
+│   ├── demo.py              # 演示代码
+│   └── demo_shadow/         # 演示影子目录
+│
+├── shadow_coding_cli.py     # CLI 启动器（init/start 命令）
+├── run_lab.py               # 实验室运行器
+├── setup.py                 # PyPI 包配置
+├── requirements.txt         # 依赖清单
+├── LICENSE                  # AGPLv3 许可证
+└── README.md                # 项目主文档
+```
+
+| 目录/文件 | 说明 |
+|----------|------|
+| `shadow_coding/core/` | 核心安全模块，包含影子化、审计、分片等功能 |
+| `security_lab/` | 安全测试套件，验证防护能力 |
+| `docs/` | 完整文档，包括安全报告、法律声明等 |
+| `shadow_coding_cli.py` | 命令行工具，用户通过它初始化和启动项目 |
 
 ---
 

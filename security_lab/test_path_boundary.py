@@ -6,19 +6,21 @@ from pathlib import Path
 # 确保导入路径正确
 sys.path.append(os.getcwd())
 
-from shadow_coding.core.fs_tunnel import FileSystemTunnelV2
+from shadow_coding.core.fs_tunnel import FileSystemTunnelV3
 from shadow_coding.core.shadow import ShadowGenerator, SpineProtocol
 
 def test_path_boundary():
     print("\n" + "🛡️ Shadow_Coding Path Boundary & Sanitization ".center(60, "="))
-    
+
     # 模拟环境
     real_dir = Path("./lab_real").resolve()
     shadow_dir = Path("./lab_shadow").resolve()
+    state_dir = Path("./lab_state").resolve()
     real_dir.mkdir(exist_ok=True)
     shadow_dir.mkdir(exist_ok=True)
-    
-    tunnel = FileSystemTunnelV2(str(real_dir), str(shadow_dir))
+    state_dir.mkdir(exist_ok=True)
+
+    tunnel = FileSystemTunnelV3(str(real_dir), str(shadow_dir), str(state_dir))
     
     # 1. 测试目录穿越拦截
     traversal_path = Path("/etc/passwd")
